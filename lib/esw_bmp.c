@@ -10,8 +10,6 @@
 unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER* bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader) {
     int fd_input;
     unsigned char *bitmapImage;
-    //int imageIdx = 0;
-    //unsigned char tempRGB;
 
     fd_input = open(filename, O_RDONLY);
     if (fd_input == -1) {
@@ -26,9 +24,30 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER* bitmapFileHeader
         return NULL;
     }
 
-    read(fd_input, bitmapInfoHeader, sizeof(BITMAPINFOHEADER));
-printf("%d\n",sizeof(BITMAPINFOHEADER));
-	printf("%lu\n",bitmapInfoHeader->biSizeImage);    
+    read(fd_input, bitmapInfoHeader, sizeof(BITMAPINFOHEADER));  
+/*
+    LONG nWidth = bitmapInfoHeader->biWidth;
+    LONG nHeight = bitmapInfoHeader->biHeight;
+    WORD nBitCount = bitmapInfoHeader->biBitCount;
+
+    DWORD dwWidthStep = (DWORD)((nWidth * nBitCount / 8 + 3) & ~3);
+    DWORD dwSizeImage = nHeight * dwWidthStep;
+
+    DWORD dwDibSize;
+    if (nBitCount == 24)
+	dwDibSize = sizeof(BITMAPINFOHEADER) + dwSizeImage;
+    else
+	dwDibSize = sizeof(BITMAPINFOHEADER) + sizeof(RGBQUAD) * (1 << nBitCount) + dwSizeImage;
+
+
+    BYTE* pDib = (BYTE*)malloc(sizeof(BYTE)*dwDibSize);
+
+    if(pDib == NULL){
+	close(fd_input);
+	return NULL;
+    }
+*/
+
     lseek(fd_input, bitmapFileHeader->bfOffBits, SEEK_SET);
                         
                       
@@ -55,8 +74,40 @@ printf("%d\n",sizeof(BITMAPINFOHEADER));
 
     close(fd_input); 
     return bitmapImage;
-
 }
+
+
+RGBPIXEL** pixelVecToArray(BITMAPINFOHEADER* bitmapInfoHeader, unsigned char* vecRGBPixels){
+    int width = bitmapInfoHeader->biWidth;
+    int height = bitmapInfoHeader->biHeight;
+    int i;
+    RGBPIXEL** rgbPixelArray = (RGBPIXEL**)malloc(sizeof(RGBPIXEL*)*height);
+    for(i = 0; i < height; i++){
+	rgbPixelArray[i] = (RGBPIXEL*)malloc(sizeof(RGBPIXEL)*width);
+    }
+    
+
+
+    if(bitmapInfoHeader->biBitCount == 24){
+    	for(i = 0; i < bitmapInfoHeader->biSizeImage; i += 3){
+		RGBPIXEL tempPixel;
+		tempPixel.rgbBlue = vecRGBPixels[i];
+		tempPixel.rgbGreen = vecRGBPixels[i+1];
+		tempPixel.rgbRed = vecRGBPixels[i+2]; 
+
+		rgbPixelArray[(i/3)/width][(i/3)%width] = tempPixel;
+        }
+    }
+    else{
+	for(i = 0; i < bitmapInfoHeader->biSizeImage; i++){
+		RGBPIXEL tempPixel;
+		tempPixel.rgbBlue = tempPixel.rgbGreen = tempPixel.rgbRed = vecRGBPixels[i];
+		rgbPixelArray[i/width][i%width] = tempPixel;
+        }
+    }
+    return rgbPixelArray;
+}
+
 
 void WriteBitmapFile(char* filename, unsigned char* bitmapImage, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader) {
 
@@ -65,14 +116,16 @@ void WriteBitmapFile(char* filename, unsigned char* bitmapImage, BITMAPFILEHEADE
     write(fd_output, bitmapFileHeader, sizeof(BITMAPFILEHEADER));
     write(fd_output, bitmapInfoHeader, sizeof(BITMAPINFOHEADER));
     
-    for (int i = 0; i < 256; i++) {
-    
-        RGBQUAD tempRGBQUAD;        
-        tempRGBQUAD.rgbBLUE = tempRGBQUAD.rgbGreen = tempRGBQUAD.rgbRED = (BYTE)i;        
-        tempRGBQUAD.rgbReserved = 0;        
-	write(fd_output, &tempRGBQUAD, sizeof(RGBQUAD));
+    if(bitmapInfoHeader->biBitCount == 8){
+	for (int i = 0; i < 256; i++) {
+	    
+	    RGBQUAD tempRGBQUAD;        
+	    tempRGBQUAD.rgbBlue = tempRGBQUAD.rgbGreen = tempRGBQUAD.rgbRed = (BYTE)i;        
+	    tempRGBQUAD.rgbReserved = 0;        
+	    write(fd_output, &tempRGBQUAD, sizeof(RGBQUAD));
+	}
     }
+
     write(fd_output, bitmapImage, bitmapInfoHeader->biSizeImage);
     close(fd_output);
 }
-
