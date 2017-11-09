@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -g -Wall
 INCOPT = -I../inc
 OUTPUT = libbmpfuncs.a
-OBJFILES = esw_bmp.o
+OBJFILES = esw_bmp.o rgb2gray.o
 .PHONY: clean
 
 $(OUTPUT): $(OBJFILES)
