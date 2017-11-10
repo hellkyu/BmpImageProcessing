@@ -10,20 +10,33 @@ int main(int argc, char* argv[]){
  unsigned char *bitmapData;
  RGBPIXEL** rgbPixelArray;
  
- unsigned char **output;
+ RGBPIXEL **output;
 
  bitmapData = LoadBitmapFile("lenna.bmp", &bitmapFileHeader, &bitmapInfoHeader);
  printf("%d\n",bitmapInfoHeader.biBitCount);
  rgbPixelArray = pixelVecToArray(&bitmapInfoHeader, bitmapData);
+ /*
+for (int i = 0; i<bitmapInfoHeader.biHeight;i++)
+   {
+      for (int j = 0; j<bitmapInfoHeader.biWidth;j++)
+      {
+         printf("%d ",rgbPixelArray[i][j].rgbRed+rgbPixelArray[i][j].rgbGreen+rgbPixelArray[i][j].rgbBlue);
+      }
+      printf("\n");
+   }
+ */
+ if(bitmapInfoHeader.biBitCount == 24)
+ {
+	printf("rgb to grayscale..\n");
+	output = rgb2gray(rgbPixelArray,bitmapInfoHeader);
+ }
 
- 
- output = rgb2gray(rgbPixelArray,bitmapInfoHeader);
 
  for (int i = 0; i<bitmapInfoHeader.biHeight;i++)
    {
       for (int j = 0; j<bitmapInfoHeader.biWidth;j++)
       {
-         printf("%d ",output[i][j]);
+         printf("%d ",output[i][j].rgbRed+output[i][j].rgbGreen+output[i][j].rgbBlue);
       }
       printf("\n");
    }
