@@ -12,7 +12,7 @@ int main(int argc, char* argv[]){
  
  unsigned char **output;
 
- bitmapData = LoadBitmapFile("cameraman.bmp", &bitmapFileHeader, &bitmapInfoHeader);
+ bitmapData = LoadBitmapFile("lenna.bmp", &bitmapFileHeader, &bitmapInfoHeader);
  printf("%d\n",bitmapInfoHeader.biBitCount);
  rgbPixelArray = pixelVecToArray(&bitmapInfoHeader, bitmapData);
 
