@@ -53,7 +53,7 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER* bitmapFileHeader
 
 RGBPIXEL** pixelVecToArray(BITMAPINFOHEADER* bitmapInfoHeader, unsigned char* vecRGBPixels);
 
-void WriteBitmapFile(char* filename, unsigned char* bitmapImage, BITMAPFILEHEADER* bitmapFileHeader, BITMAPINFOHEADER* bitmapInfoHeader);
+void WriteBitmapFile(char* filename, void** bmpdata, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader);
 
 
 #endif

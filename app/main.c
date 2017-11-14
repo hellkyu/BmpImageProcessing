@@ -9,38 +9,30 @@ int main(int argc, char* argv[]){
 
  BITMAPFILEHEADER bitmapFileHeader;
  BITMAPINFOHEADER bitmapInfoHeader;
- unsigned char *bitmapData;
+ unsigned char* bitmapRawData;
  RGBPIXEL** rgbPixelArray;
- unsigned char **output;
+ unsigned char** bmpdata; 
+ void** outputData;
 
  if(argc != 2)   
 	fprintf(stderr,"format : exefile bmpfile\n");
 
- bitmapData = LoadBitmapFile(argv[1], &bitmapFileHeader, &bitmapInfoHeader);
- printf("%d\n",bitmapInfoHeader.biBitCount);
- rgbPixelArray = pixelVecToArray(&bitmapInfoHeader, bitmapData);
+ bitmapRawData = LoadBitmapFile(argv[1], &bitmapFileHeader, &bitmapInfoHeader);
+ rgbPixelArray = pixelVecToArray(&bitmapInfoHeader, bitmapRawData);
+
+ bmpdata = rgb2gray(rgbPixelArray,bitmapInfoHeader);
+
+
+ /* some processing */
+ //bmpdata = bitPlane(bmpdata,bitmapInfoHeader,1);
+ /* some processing */
+
+
+ if(bitmapInfoHeader.biBitCount == 24){
+    outputData = (void**)gray2rgb(bmpdata, bitmapInfoHeader);
+ }
+ else
+    outputData = (void**)bmpdata;
  
-/*
-for (int i = 0; i<bitmapInfoHeader.biHeight;i++)
-{
-	for (int j = 0; j<bitmapInfoHeader.biWidth;j++)
-	{
-		printf("%d ",rgbPixelArray[i][j].rgbRed+rgbPixelArray[i][j].rgbGreen+rgbPixelArray[i][j].rgbBlue);
-	}
-	printf("\n");
-}
-*/
-
-output = rgb2gray(rgbPixelArray,bitmapInfoHeader);
-output = bitPlane(output,bitmapInfoHeader,7);
-for (int i = 0; i<bitmapInfoHeader.biHeight;i++)
-{
-	for (int j = 0; j<bitmapInfoHeader.biWidth;j++)
-	{
-		printf("%d ",output[i][j]);
-	}
-	printf("\n");
-}
-
-WriteBitmapFile("output.bmp", bitmapData, &bitmapFileHeader, &bitmapInfoHeader);
+ WriteBitmapFile("output.bmp", outputData, &bitmapFileHeader, &bitmapInfoHeader);
 }
