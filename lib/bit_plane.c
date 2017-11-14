@@ -4,11 +4,12 @@
 #include "esw_bmp.h"
 #include "bit_plane.h"
 
-RGBPIXEL **bitPlane(RGBPIXEL **output,BITMAPINFOHEADER bitmapInfoHeader,int level)
+unsigned char **bitPlane(unsigned char **output,BITMAPINFOHEADER bitmapInfoHeader,int level)
 {
-  int HEIGHT = bitmapInfoHeader.biHeight;
-  int WIDTH = bitmapInfoHeader.biWidth;
-double c;
+  //int HEIGHT = bitmapInfoHeader.biHeight;
+  //int WIDTH = bitmapInfoHeader.biWidth;
+  //double c;
+/*
   for (int i = 0; i<HEIGHT;i++)
   {
     for (int j = 0; j<WIDTH;j++)
@@ -21,6 +22,6 @@ double c;
          output[i][j].rgbBlue=c;
     }
   }
-
-  return output;
+*/
+  //return output;
 }

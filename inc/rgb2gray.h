@@ -2,6 +2,7 @@
 #define __RGB2GRAY__
 
 
-RGBPIXEL ** rgb2gray(RGBPIXEL **rgbPixelArray,BITMAPINFOHEADER bitmapInfoHeader);
+unsigned char **rgb2gray(RGBPIXEL **rgbPixelArray,BITMAPINFOHEADER bitmapInfoHeader);
+RGBPIXEL **gray2rgb(unsigned char **rgbPixelArray,BITMAPINFOHEADER bitmapInfoHeader);
 
 #endif
