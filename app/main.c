@@ -24,7 +24,7 @@ int main(int argc, char* argv[]){
 
 
  /* some processing */
- //bmpdata = bitPlane(bmpdata,bitmapInfoHeader,1);
+ bmpdata = bitPlane(bmpdata,bitmapInfoHeader,5);
  /* some processing */
 
 
@@ -33,6 +33,7 @@ int main(int argc, char* argv[]){
  }
  else
     outputData = (void**)bmpdata;
- 
+
  WriteBitmapFile("output.bmp", outputData, &bitmapFileHeader, &bitmapInfoHeader);
+ printf("Success output.\n");
 }

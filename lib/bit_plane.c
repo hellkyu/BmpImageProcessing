@@ -16,7 +16,7 @@ unsigned char **bitPlane(unsigned char **output,BITMAPINFOHEADER bitmapInfoHeade
     {
 	
 	c = ((int)output[i][j]/(int)pow(2,level))%2;
-	//c = (output[i][j].rgbRed/2*2)%2;
+ 	c = c*255;
 	output[i][j]=c;
     }
   }
