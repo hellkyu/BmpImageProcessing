@@ -6,10 +6,10 @@ OUTPUT = imgprc
 .PHONY: clean
 
 $(OUTPUT): main.o $(LIBDIR)/libbmpfuncs.a
-	$(CC) $(CFLAGS) -o $@ $< -L$(LIBDIR) -lbmpfuncs 
+	$(CC) $(CFLAGS) -o $@ $< -L$(LIBDIR) -lbmpfuncs -lm
 
 main.o: main.c
-	$(CC) $(CFLAGS) -c $< -o $@ -I$(INCDIR)
+	$(CC)  $(CFLAGS) -c $< -o $@ -I$(INCDIR)
 
 clean: 
 	rm *.o $(OUTPUT)
