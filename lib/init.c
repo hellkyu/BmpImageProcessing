@@ -2,16 +2,12 @@
 
 void init()
 {
-  printf("      [ Image Processing Program ]      \n\n");
-  printf("COMMAND FORMAT\n");
-  printf(" $ yourbmpfile OPTION\n\n");
+  printf("      [ Image Processing Program ]   exit q   \n\n");
   printf("OPTION\n ");
-  printf("bitplane : bmp bit plane\
-  \n resolution : bmp effective resolustion(pixelization)\
-  \n Dithering :  bmp dithering\
-  \n hist : bmp histogram \
-  \n quanti : bmp quantization \
-  \n sharp : bmp edge sharping\n");
-
-
+  printf("1. bitplane : bmp bit plane\
+  \n 2. resolution : bmp effective resolustion(pixelization)\
+  \n 3. Dithering :  bmp dithering\
+  \n 4. hist : bmp histogram \
+  \n 5. quanti : bmp quantization \
+  \n 6. sharp : bmp edge sharping\n\n\n");
 }
