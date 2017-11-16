@@ -32,14 +32,12 @@ int main(int argc, char* argv[]){
    printf(">> Enter the image processing option number : ");
    scanf("%c",&opt_n);
    //opt_n = getch();
-int n;
+   int n;
    /* some processing */
    switch(opt_n)
    {
       case 0x31:
-           
-  	   printf("Select bit plane Level[0~7] : "); scanf("%d",&n);
-           bmpdata = bitPlane(bmpdata,bitmapInfoHeader,n);
+           bmpdata = bitPlane(bmpdata,bitmapInfoHeader);
            break;
       case 0x32:
            printf("2\n");
@@ -66,7 +64,7 @@ int n;
    outputData = (void**)bmpdata;
  
    WriteBitmapFile("output.bmp", outputData, &bitmapFileHeader, &bitmapInfoHeader);
-   // printf("Success output.\n");
+   printf("Success output.\n");
 
 
 	}
