@@ -31,11 +31,11 @@ unsigned char** histogramEqualization(unsigned char** bmpdata, BITMAPINFOHEADER*
         normalized_cumulative_histogram[i] = cumulative_histogram[i] / (float)image_size;
     }
 
-
     output = (unsigned char**)malloc(sizeof(unsigned char*)*height);
     for(int y = 0; y < height; y++){
         output[y] = (unsigned char*)malloc(sizeof(unsigned char)*width);
     }
+
     // apply histogram equalization
     for(int y = 0; y < height; y++){
         for(int x = 0; x < width; x++){

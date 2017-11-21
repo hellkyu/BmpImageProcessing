@@ -57,18 +57,17 @@ int main(int argc, char* argv[]){
 	   printf("EXIT\n");
 	   exit(0);
            break;
-   }
-
- if(bitmapInfoHeader.biBitCount == 24){
-   outputData = (void**)gray2rgb(bmpdata, bitmapInfoHeader);
  }
- else
-   outputData = (void**)bmpdata;
+   if(bitmapInfoHeader.biBitCount == 24){
+       outputData = (void**)gray2rgb(bmpdata, bitmapInfoHeader);
+   }
+   else
+       outputData = (void**)bmpdata;
  
    WriteBitmapFile("output.bmp", outputData, &bitmapFileHeader, &bitmapInfoHeader);
+   free(bitmapRawData);
+   free(rgbPixelArray);
+   free(bmpdata);
    printf("Success output.\n");
-
-
-	}
-
+ }
 }

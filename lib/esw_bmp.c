@@ -60,8 +60,6 @@ RGBPIXEL** pixelVecToArray(BITMAPINFOHEADER* bitmapInfoHeader, unsigned char* ve
 	rgbPixelArray[i] = (RGBPIXEL*)malloc(sizeof(RGBPIXEL)*width);
     }
     
-
-
     if(bitmapInfoHeader->biBitCount == 24){
     	for(i = 0; i < bitmapInfoHeader->biSizeImage; i += 3){
 		RGBPIXEL tempPixel;
