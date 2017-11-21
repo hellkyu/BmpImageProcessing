@@ -30,34 +30,39 @@ int main(int argc, char* argv[]){
 
    init();
 
-   char opt_n[1];
+   char opt_n;
 	
    printf(">> Enter the image processing option number : ");
-   fgets(opt_n,sizeof(opt_n),stdin);
-   //opt_n = getch();
-   int n;
+   opt_n = getchar();
+    //printf("%c\n",opt_n[1]);
+
    /* some processing */
    switch(opt_n)
    {
-      case 0x31:
+      case 0x31: // bit plane
            bmpdata = bitPlane(bmpdata,bitmapInfoHeader);
            break;
-      case 0x32:
-           printf("2\n");
+      case 0x32: // resolution 
+           
            break;
-      case 0x33:
-           printf("3\n");
+      case 0x33: // Dithering
+           
            break;
-      case 0x34:
+      case 0x34: // histogram
 	   bmpdata = histogramEqualization(bmpdata, &bitmapInfoHeader);
-           printf("4\n");
            break;
-      case 0x35:
-           printf("5\n");
+      case 0x35: // quantization
+           
+           break;
+      case 0x36: // edge sharping
+           
            break;
       case 'q':
 	   printf("EXIT\n");
 	   exit(0);
+           break;
+      default:
+           printf("Error Option Number 1~6\n");
            break;
  }
    if(bitmapInfoHeader.biBitCount == 24){
@@ -70,6 +75,5 @@ int main(int argc, char* argv[]){
    free(bitmapRawData);
    free(rgbPixelArray);
    free(bmpdata);
-   printf("Success output.\n");
  }
 }
