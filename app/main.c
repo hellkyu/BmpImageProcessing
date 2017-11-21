@@ -4,6 +4,7 @@
 #include "esw_bmp.h"
 #include "rgb2gray.h"
 #include "bit_plane.h"
+#include "esw_process1.h"
 
 int main(int argc, char* argv[]){
 
@@ -46,6 +47,7 @@ int main(int argc, char* argv[]){
            printf("3\n");
            break;
       case 0x34:
+	   bmpdata = histogramEqualization(bmpdata, &bitmapInfoHeader);
            printf("4\n");
            break;
       case 0x35:
