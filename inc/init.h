@@ -1,7 +1,7 @@
-#ifndef __INIT1__
-#define __INIT1__
+#ifndef __MANUAL__
+#define __MANUAL__
 
 void init();
 
 
-#endif __INIT1__
+#endif

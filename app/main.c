@@ -15,6 +15,8 @@ int main(int argc, char* argv[]){
  unsigned char** bmpdata;
  void** outputData;
 
+
+  
  if(argc != 2)
  {
    fprintf(stderr,"COMMAND FORMAT\n $ exefile bmpfile\n");
@@ -28,10 +30,10 @@ int main(int argc, char* argv[]){
 
    init();
 
-   char opt_n;
+   char opt_n[1];
 	
    printf(">> Enter the image processing option number : ");
-   scanf("%c",&opt_n);
+   fgets(opt_n,sizeof(opt_n),stdin);
    //opt_n = getch();
    int n;
    /* some processing */
