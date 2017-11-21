@@ -1,10 +1,12 @@
 #include<stdio.h>
 #include<stdlib.h>
+
 #include "init.h"
 #include "esw_bmp.h"
 #include "rgb2gray.h"
 #include "bit_plane.h"
 #include "esw_process1.h"
+#include "resolution.h"
 
 int main(int argc, char* argv[]){
 
@@ -43,7 +45,7 @@ int main(int argc, char* argv[]){
            bmpdata = bitPlane(bmpdata,bitmapInfoHeader);
            break;
       case 0x32: // resolution 
-           
+          bmpdata= resolution(bmpdata,bitmapInfoHeader);
            break;
       case 0x33: // Dithering
            
