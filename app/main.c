@@ -55,7 +55,7 @@ int main(int argc, char* argv[]){
 	   bmpdata = histogramEqualization(bmpdata, &bitmapInfoHeader);
            break;
       case 0x35: // quantization
-           
+           bmpdata = quantization(bmpdata, &bitmapInfoHeader);
            break;
       case 0x36: // edge sharping
            

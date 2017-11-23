@@ -44,3 +44,18 @@ unsigned char** histogramEqualization(unsigned char** bmpdata, BITMAPINFOHEADER*
     }
     return output;
 }
+
+unsigned char** quantization(unsigned char** bmpdata, BITMAPINFOHEADER* bitmapInfoHeader){
+    int width = bitmapInfoHeader->biWidth;
+    int height = bitmapInfoHeader->biHeight;
+    unsigned char level;
+    printf(">> Enter the quantization level : ");
+    scanf("%u", &level);
+
+    for(int y = 0; y < height; y++){
+        for(int x = 0; x < width; x++){
+            bmpdata[y][x] = (bmpdata[y][x] / level) * level;
+        }
+    }
+    return bmpdata;
+}
