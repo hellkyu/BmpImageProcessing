@@ -49,7 +49,7 @@ int main(int argc, char* argv[]){
           bmpdata= resolution(bmpdata,bitmapInfoHeader);
            break;
       case 0x33: // Dithering
-           dithering(bmpdata,bitmapInfoHeader);
+           bmpdata = dithering(bmpdata,bitmapInfoHeader);
            break;
       case 0x34: // histogram
 	   bmpdata = histogramEqualization(bmpdata, &bitmapInfoHeader);
