@@ -7,6 +7,7 @@
 #include "bit_plane.h"
 #include "esw_process1.h"
 #include "resolution.h"
+#include "dithering.h"
 
 int main(int argc, char* argv[]){
 
@@ -48,7 +49,7 @@ int main(int argc, char* argv[]){
           bmpdata= resolution(bmpdata,bitmapInfoHeader);
            break;
       case 0x33: // Dithering
-           
+           dithering(bmpdata,bitmapInfoHeader);
            break;
       case 0x34: // histogram
 	   bmpdata = histogramEqualization(bmpdata, &bitmapInfoHeader);
