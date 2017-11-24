@@ -29,15 +29,15 @@ unsigned char **dithering(unsigned char **output,BITMAPINFOHEADER bitmapInfoHead
        break;
     
   }
-  int R[128*option][128*option];
+  int R[128*2][128*2];
 
-  for(int i = 0;i<option;i++)
+  for(int i = 0;i<2;i++)
   {   
-     for(int j = 0;j<option;j++)
+     for(int j = 0;j<2;j++)
      {   
-        for(int x = i;x<i+128+option+1;x =x+option)
+        for(int x = i;x<256;x =x+2)
         {
-           for(int y = j;y<j+128+option+1;y = y+option)
+           for(int y = j;y<256;y = y+2)
            {
               // printf("x : %d ,y : %d, i: %d, j : %d\n",x,y,i,j); 
                if(option == 2)
@@ -69,9 +69,9 @@ unsigned char **dithering(unsigned char **output,BITMAPINFOHEADER bitmapInfoHead
   printf("\n\n");
 
   int flag;
-  for(int i = 0;i<128*option;i++)
+  for(int i = 0;i<256;i++)
   {   
-     for(int j = 0;j<128*option;j++)
+     for(int j = 0;j<256;j++)
      {   
         output[i][j] = (output[i][j] > R[i][j]) ? 1:0;
         printf("%d ",output[i][j]);
