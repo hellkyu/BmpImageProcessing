@@ -73,7 +73,7 @@ unsigned char **dithering(unsigned char **output,BITMAPINFOHEADER bitmapInfoHead
   {   
      for(int j = 0;j<256;j++)
      {   
-        output[i][j] = (output[i][j] > R[i][j]) ? 1:0;
+        output[i][j] = (output[i][j] > R[i][j]) ? 255:0;
         printf("%d ",output[i][j]);
        
      }
