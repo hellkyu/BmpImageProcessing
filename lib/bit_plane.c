@@ -14,7 +14,7 @@ unsigned char **bitPlane(unsigned char **output,BITMAPINFOHEADER bitmapInfoHeade
   
   while(1)
   {
-    printf("Select bit plane Level[0~7] : "); scanf("%d",&level);
+    printf(">> Enter the bit plane Level[0~7] : "); scanf("%d",&level);
 
     if (level >7 || level <-1)
        printf("Range of level 0~7\n");
