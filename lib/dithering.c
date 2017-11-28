@@ -5,6 +5,72 @@
 #include "esw_bmp.h"
 #include "dithering.h"
 
+unsigned char **floyd(unsigned char **output,BITMAPINFOHEADER bitmapInfoHeader)
+{
+   int HEIGHT = bitmapInfoHeader.biHeight;
+   int WIDTH = bitmapInfoHeader.biWidth;
+
+   unsigned char **y = ( unsigned char **)malloc(sizeof( unsigned char *)*HEIGHT);
+ 
+   for (int i = 0; i<HEIGHT;i++)
+   {
+	   y[i] = (unsigned char *)malloc(sizeof(unsigned char)*WIDTH);
+   }
+
+  unsigned char **z = ( unsigned char **)malloc(sizeof( unsigned char *)*HEIGHT);
+ 
+   for (int i = 0; i<HEIGHT+1;i++)
+   {
+	  z[i] = (unsigned char *)malloc(sizeof(unsigned char)*WIDTH+1);
+   }
+   unsigned char e ;
+   
+   
+   for(int i = 0;i<HEIGHT+1;i++)
+   {
+      for(int j = 0;j<WIDTH+1;j++)
+      {
+          if(i == 0 || j == 0)
+             z[i][j] = 0;
+          else
+             z[i][j] = output[i-1][j-1];
+          
+      }
+   }
+   for(int i = 1;i<HEIGHT-1;i++)
+   {
+      for(int j = 1;j<WIDTH-1;j++)
+      {
+          if(z[i][j] < 128)
+          {
+             y[i-1][j-1] = 0;
+             e = z[i][j];
+          }
+          else
+          {
+             y[i-1][j-1] = 255;
+             e = z[i][j]-255; 
+          }
+          z[i][j+1] = z[i][j+1]+7*e/16;
+          z[i+1][j-1] = z[i+1][j-1]+3*e/16;
+          z[i+1][j] = z[i+1][j]+5*e/16;
+          z[i+1][j+1] = z[i+1][j+1]+e/16;
+      }
+   }
+   
+  
+  for(int i = 0;i<10;i++)
+  {   
+     for(int j = 0;j<10;j++)
+     {   
+        printf("%o ",z[i][j]);
+     }
+     printf("\n");
+  }
+   return z;
+}
+
+
 unsigned char **dithering(unsigned char **output,BITMAPINFOHEADER bitmapInfoHeader)
 {
   int HEIGHT = bitmapInfoHeader.biHeight;
@@ -29,12 +95,13 @@ unsigned char **dithering(unsigned char **output,BITMAPINFOHEADER bitmapInfoHead
        else // D
           size = 2;
        break;
- 
+       
     case 0x66: // Floyd-steinberg
+       output = floyd(output,bitmapInfoHeader);
        
        break;
   }
-  int R[128*size][128*size];
+ /* int R[128*size][128*size];
 
   for(int i = 0;i<size;i++)
   {   
@@ -53,7 +120,7 @@ unsigned char **dithering(unsigned char **output,BITMAPINFOHEADER bitmapInfoHead
         }
      }
   }
-
+*/
 /*
   for(int i = 0;i<2*4;i++)
   {   
@@ -74,7 +141,7 @@ unsigned char **dithering(unsigned char **output,BITMAPINFOHEADER bitmapInfoHead
   }
   printf("\n\n");
 */
-
+/*
   int flag;
   for(int i = 0;i<256;i++)
   {   
@@ -83,6 +150,6 @@ unsigned char **dithering(unsigned char **output,BITMAPINFOHEADER bitmapInfoHead
         output[i][j] = (output[i][j] > R[i][j]) ? 255:0;
      }
   }
-
+*/
   return output;
 }
