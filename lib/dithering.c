@@ -4,52 +4,57 @@
 
 #include "esw_bmp.h"
 #include "dithering.h"
+//export MALLOC_CHECK_ = 0;
 
-unsigned char **floyd(unsigned char **output,BITMAPINFOHEADER bitmapInfoHeader)
+double **floyd(unsigned char **output,BITMAPINFOHEADER bitmapInfoHeader)
 {
-   int HEIGHT = bitmapInfoHeader.biHeight;
-   int WIDTH = bitmapInfoHeader.biWidth;
-
-   unsigned char **y = ( unsigned char **)malloc(sizeof( unsigned char *)*HEIGHT);
+   int HEIGHT = bitmapInfoHeader.biHeight;//256
+   int WIDTH = bitmapInfoHeader.biWidth;//256
+   
+   // y = 256*256
+   float **y = (float **)malloc(sizeof( double *)*HEIGHT);
  
    for (int i = 0; i<HEIGHT;i++)
    {
-	   y[i] = (unsigned char *)malloc(sizeof(unsigned char)*WIDTH);
+	   y[i] = (float *)malloc(sizeof(float)*WIDTH);
    }
-
-  unsigned char **z = ( unsigned char **)malloc(sizeof( unsigned char *)*HEIGHT);
+   
+   // z = 258*258
+   float **z = ( float **)malloc(sizeof( float *)*(HEIGHT+2));
  
-   for (int i = 0; i<HEIGHT+1;i++)
+   for (int i = 0; i<HEIGHT+2;i++)
    {
-	  z[i] = (unsigned char *)malloc(sizeof(unsigned char)*WIDTH+1);
+	  z[i] = (float *)malloc(sizeof(float)*(WIDTH+2));
    }
-   unsigned char e ;
+  double e ;
    
    
-   for(int i = 0;i<HEIGHT+1;i++)
+   for(int i = 0;i<HEIGHT+2;i++)
    {
-      for(int j = 0;j<WIDTH+1;j++)
+      for(int j = 0;j<WIDTH+2;j++)
       {
-          if(i == 0 || j == 0)
+          if(i == 0 || j == 0 ||j == WIDTH+1 || i==HEIGHT+1)
              z[i][j] = 0;
           else
              z[i][j] = output[i-1][j-1];
           
       }
    }
-   for(int i = 1;i<HEIGHT-1;i++)
+  
+  
+   for(int i = 1;i<HEIGHT+1;i++)
    {
-      for(int j = 1;j<WIDTH-1;j++)
+      for(int j = 1;j<WIDTH+1;j++)
       {
-          if(z[i][j] < 128)
+          if(z[i][j] < 128.0)
           {
-             y[i-1][j-1] = 0;
+             y[i-1][j-1] = 0.0;
              e = z[i][j];
           }
           else
           {
-             y[i-1][j-1] = 255;
-             e = z[i][j]-255; 
+             y[i-1][j-1] = 255.0;
+             e = z[i][j]-255.0; 
           }
           z[i][j+1] = z[i][j+1]+7*e/16;
           z[i+1][j-1] = z[i+1][j-1]+3*e/16;
@@ -57,16 +62,26 @@ unsigned char **floyd(unsigned char **output,BITMAPINFOHEADER bitmapInfoHeader)
           z[i+1][j+1] = z[i+1][j+1]+e/16;
       }
    }
-   
-  
-  for(int i = 0;i<10;i++)
+   printf("%.4f\n\n",e);
+   /*
+   for(int i = 1;i<HEIGHT+1;i++)
+   {
+      for(int j = 1;j<WIDTH+1;j++)
+      {
+         output[i-1][j-1] = (unsigned char) z[i][j];
+      }
+   }
+   */
+    for(int i = 0;i<10;i++)
   {   
      for(int j = 0;j<10;j++)
      {   
-        printf("%o ",z[i][j]);
+        printf("%.4f ",z[i][j]);
      }
      printf("\n");
   }
+   
+ 
    return z;
 }
 

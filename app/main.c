@@ -75,8 +75,8 @@ int main(int argc, char* argv[]){
        outputData = (void**)bmpdata;
  
    WriteBitmapFile("output.bmp", outputData, &bitmapFileHeader, &bitmapInfoHeader);
-   free(bitmapRawData);
-   free(rgbPixelArray);
-   free(bmpdata);
+   //free(bitmapRawData);
+   //free(rgbPixelArray);
+   //free(bmpdata);
  }
 }
