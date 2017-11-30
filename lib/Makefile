@@ -2,9 +2,8 @@ CC = gcc
 CFLAGS = -g -Wall
 INCOPT = -I../inc
 OUTPUT = libbmpfuncs.a
-OBJFILES = resolution.o init.o esw_process1.o \
-            esw_bmp.o rgb2gray.o bit_plane.o \
-           dithering.o
+OBJFILES = init.o esw_process1.o  esw_process2.o\
+            esw_bmp.o rgb2gray.o
 .PHONY: clean
 
 $(OUTPUT): $(OBJFILES)

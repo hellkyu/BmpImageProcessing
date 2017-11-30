@@ -4,10 +4,8 @@
 #include "init.h"
 #include "esw_bmp.h"
 #include "rgb2gray.h"
-#include "bit_plane.h"
 #include "esw_process1.h"
-#include "resolution.h"
-#include "dithering.h"
+#include "esw_process2.h"
 
 int main(int argc, char* argv[]){
 
