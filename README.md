@@ -7,7 +7,7 @@ There are 8 image processing function.
 Manuals
 -------------
 
-This program executes only **256*256 size *bmpfile***.
+This program executes only 256*256 size *bmpfile*.
 
 **Command Format**
  $ ./improc bmpfilename OPTION
@@ -32,7 +32,7 @@ This program executes only **256*256 size *bmpfile***.
          5.  -q : bmp quantization                
              range of quantization level [1 ~ 9]
 
-         6.  -s : bmp edge sharping
+         6.  -e : bmp edge sharping
 
 
 #### <i class="icon-file"></i> **Output file**
