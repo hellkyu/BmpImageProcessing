@@ -60,10 +60,10 @@ unsigned char** quantization(unsigned char** bmpdata, BITMAPINFOHEADER* bitmapIn
     return bmpdata;
 }
 
-unsigned char** unsharp_masking(unsigned char** bmpdata, BITMAPINFOHEADER* bitmapInfoHeader){
+unsigned char** unsharpMasking(unsigned char** bmpdata, BITMAPINFOHEADER* bitmapInfoHeader){
     int width = bitmapInfoHeader->biWidth;
     int height = bitmapInfoHeader->biHeight;
-    float alpha = 0.5;
+    float alpha = 0.2;
     float** unsharped = (float**)malloc(sizeof(float*)*height);
     for(int y = 0; y < height; y++){
         unsharped[y] = (float*)malloc(sizeof(float)*width);
@@ -89,7 +89,7 @@ unsigned char** unsharp_masking(unsigned char** bmpdata, BITMAPINFOHEADER* bitma
                     continue;
                 filtered_sum += (float)bmpdata[next_y][next_x] * (-alpha);           
             }
-            filtered_sum /= (alpha+1);
+            filtered_sum = filtered_sum / (alpha+1);
             unsharped[y][x] = filtered_sum;
         }
     }

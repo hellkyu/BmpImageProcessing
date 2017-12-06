@@ -57,6 +57,7 @@ int main(int argc, char* argv[]){
 		          break;
 		     case 'e':  // edge sharping
 		         // num = 6;
+			  bmpdata = unsharpMasking(bmpdata, &bitmapInfoHeader);
 		          break;
 		     default:
 		          //num = -1;

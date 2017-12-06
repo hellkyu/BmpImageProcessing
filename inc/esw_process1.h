@@ -3,4 +3,5 @@
 
 unsigned char** histogramEqualization(unsigned char** bmpdata, BITMAPINFOHEADER* bitmapInfoHeader);
 unsigned char** quantization(unsigned char** bmpdata, BITMAPINFOHEADER* bitmapInfoHeader);
+unsigned char** unsharpMasking(unsigned char** bmpdata, BITMAPINFOHEADER* bitmapInfoHeader);
 #endif
