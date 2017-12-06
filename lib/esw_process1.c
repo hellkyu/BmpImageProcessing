@@ -59,3 +59,45 @@ unsigned char** quantization(unsigned char** bmpdata, BITMAPINFOHEADER* bitmapIn
     }
     return bmpdata;
 }
+
+unsigned char** unsharp_masking(unsigned char** bmpdata, BITMAPINFOHEADER* bitmapInfoHeader){
+    int width = bitmapInfoHeader->biWidth;
+    int height = bitmapInfoHeader->biHeight;
+    float alpha = 0.5;
+    float** unsharped = (float**)malloc(sizeof(float*)*height);
+    for(int y = 0; y < height; y++){
+        unsharped[y] = (float*)malloc(sizeof(float)*width);
+    }
+
+    int dir1[4][2] = { {1,0}, {-1,0}, {0,1}, {0,-1} };
+    int dir2[4][2] = { {1,1}, {1,-1}, {-1,1}, {-1,-1} };
+
+    for(int y = 0; y < height; y++){
+        for(int x = 0; x < width; x++){
+            float filtered_sum = (float)bmpdata[y][x]*(alpha+5);
+            for(int i = 0; i < 4; i++){
+                int next_x = x + dir1[i][0];
+                int next_y = y + dir1[i][1];
+                if(next_x < 0 || next_x >= width || next_y < 0 || next_y >=height)
+                    continue;
+                filtered_sum += (float)bmpdata[next_y][next_x] * (alpha - 1);
+            }
+            for(int i = 0; i < 4 ;i++){
+                int next_x = x + dir2[i][0];
+                int next_y = y + dir2[i][1];     
+                if(next_x < 0 || next_x >= width || next_y < 0 || next_y >=height)
+                    continue;
+                filtered_sum += (float)bmpdata[next_y][next_x] * (-alpha);           
+            }
+            filtered_sum /= (alpha+1);
+            unsharped[y][x] = filtered_sum;
+        }
+    }
+
+    for(int y = 0; y < height; y++){
+        for(int x = 0; x < width; x++){
+            bmpdata[y][x] = (unsigned char)unsharped[y][x];
+        }
+    }
+    return bmpdata;
+}
