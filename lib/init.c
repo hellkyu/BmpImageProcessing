@@ -11,7 +11,7 @@ void init()
                    \n   -d : bmp dithering\
                    \n   -h : bmp histogram\
                    \n   -q : bmp quantization\
-                   \n   -s : bmp edge sharping\n");
+                   \n   -e : bmp edge sharping\n");
                    
 }
 
