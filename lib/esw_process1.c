@@ -89,6 +89,10 @@ unsigned char** unsharpMasking(unsigned char** bmpdata, BITMAPINFOHEADER* bitmap
                     continue;
                 filtered_sum += (float)bmpdata[next_y][next_x] * (-alpha);           
             }
+            if(filtered_sum < 0)
+                filtered_sum = 0;
+            else if(filtered_sum > 255)
+                filtered_sum = 255;
             filtered_sum = filtered_sum / (alpha+1);
             unsharped[y][x] = filtered_sum;
         }
