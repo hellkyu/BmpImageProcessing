@@ -9,8 +9,8 @@ Manuals
 
 This program executes only **256*256 size *bmpfile***.
 
->**Command Format**
-  $ ./improc bmpfilename OPTION
+**Command Format**
+ $ ./improc bmpfilename OPTION
 
 
   
