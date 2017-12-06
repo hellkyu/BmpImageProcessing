@@ -27,12 +27,12 @@ This program executes only 256*256 size *bmpfile*.
          3.  -d : bmp dithering             
              dithering filter [D filter, D2 filter, Floyd-steinberg filter] 
 
-         4.  -h : bmp histogram         
+         4.  -h : bmp histogram equalization
 
          5.  -q : bmp quantization                
              range of quantization level [1 ~ 9]
 
-         6.  -e : bmp edge sharping
+         6.  -e : bmp unsharp masking
 
 
 #### <i class="icon-file"></i> **Output file**
