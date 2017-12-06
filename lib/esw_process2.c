@@ -12,7 +12,6 @@ unsigned char **bitPlane(unsigned char **output,BITMAPINFOHEADER bitmapInfoHeade
   int WIDTH = bitmapInfoHeader.biWidth;
   double c;
   int level;
-  
   while(1)
   {
     printf(">> Enter the bit plane Level[0~7] : "); scanf("%d",&level);
@@ -182,7 +181,7 @@ unsigned char **resolution(unsigned char **output,BITMAPINFOHEADER bitmapInfoHea
  
   while(1)
   {
-    printf("Select resolution reduction Level[1~9] : "); scanf("%d",&level);
+    printf(">> Enter the resolution reduction Level[1~9] : "); scanf("%d",&level);
     if (level >9 || level <1)
         printf("Range of level 1~9\n");
     else

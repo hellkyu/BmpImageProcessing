@@ -2,29 +2,17 @@
 
 void init()
 {
-  printf("┏━━━━━━━━━━━━━━━━ Image Processing Program ━━━━━━━━━━━━━━━━┓\n");
-printf("┃					   		   ┃\n");
-printf("┃OPTION						 	   ┃\n");   
-printf("┃ 1. bitplane : bmp bit plane				   ┃\
-\n┃ 2. resolution : bmp effective resolustion(pixelization)  ┃\
-\n┃ 3. Dithering :  bmp dithering				   ┃\
-\n┃ 4. hist : bmp histogram				   ┃\
-\n┃ 5. quanti : bmp quantization				   ┃\
-\n┃ 6. sharp : bmp edge sharping				   ┃\
-\n┃    					  	           ┃ \
-\n┃					            exit q ┃\
-\n┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\
-━━━━━━━━━━━━━━━━━━━━┛\n\n");
+   printf("          Manual Page         \n");
+   printf("NAME \n   --help : manual page open\n\n");
+   printf("SYNOPSIS \n   COMMAND FORMAT\n   $ exefile bmpfile OPTION\n\n");
+   printf("OPTION  \n   Option command is function of image processing.  \
+                   \n   -b : bmp bit plane\
+                   \n   -r : bmp effective resolustion(pixelization)\
+                   \n   -d : bmp dithering\
+                   \n   -h : bmp histogram\
+                   \n   -q : bmp quantization\
+                   \n   -s : bmp edge sharping\n");
+                   
 }
 
 
-/*
-printf("\n      [ Image Processing Program ]      \n\n");
-  printf("OPTION\n ");
-  printf("1. bitplane : bmp bit plane\
-  \n 2. resolution : bmp effective resolustion(pixelization)\
-  \n 3. Dithering :  bmp dithering\
-  \n 4. hist : bmp histogram \
-  \n 5. quanti : bmp quantization \
-  \n 6. sharp : bmp edge sharping\n\n\n");
-  printf("                                     exit q\n\n");*/
